@@ -35,4 +35,6 @@ Then restart Claude Code. That's it.
 
 ## Uninstall
 
-Remove the `statusLine` block from `~/.claude/settings.json` and delete `~/.claude/scripts/artemis_status.py`.
+```bash
+curl -fsSL https://raw.githubusercontent.com/PatrickRoyMac/artemis_cc_tracking/main/uninstall.sh | bash
+```
