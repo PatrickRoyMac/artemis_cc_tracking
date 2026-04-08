@@ -1,38 +1,38 @@
-# artemis_cc_tracking
+# Artemis II — Claude Code Status Bar
 
-Real-time Artemis II mission tracker as a Claude Code status bar widget.
+While Artemis II is flying to the Moon right now, why not track it live from your terminal?
 
-Shows live distance from Earth & Moon, Artemis's proportional position on the Earth→Moon track, speed, and approach direction — all in a slim single line at the bottom of Claude Code.
+This adds a real-time mission tracker to the bottom of Claude Code — showing Artemis's distance from Earth and Moon, its proportional position on the Earth→Moon track, speed, and whether it's approaching or receding.
 
 ```
 🌍 347,837 km ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦  🚀← ✦ ✦ ✦  104,695 km 🌙  ⚡0.711 km/s
 ```
 
-- **✦ dots** — proportional position between Earth and Moon
-- **← / →** — approaching Earth or heading toward Moon
-- **⚡** — geocentric speed in km/s
-- Data from [NASA JPL Horizons API](https://ssd.jpl.nasa.gov/horizons/), cached 5 min
+The ✦ dots shift in real-time as Artemis moves. The ← flips to → when it's heading back toward Earth.
 
-## Setup
+Data pulled directly from [NASA's JPL Horizons API](https://ssd.jpl.nasa.gov/horizons/), cached every 5 minutes.
 
-**1. Copy the script**
+---
+
+## Install (one line)
+
 ```bash
-cp artemis_status.py ~/.claude/scripts/artemis_status.py
+curl -fsSL https://raw.githubusercontent.com/PatrickRoyMac/artemis_cc_tracking/main/install.sh | bash
 ```
 
-**2. Add the status line to `~/.claude/settings.json`**
-```json
-{
-  "statusLine": {
-    "type": "command",
-    "command": "python3 ~/.claude/scripts/artemis_status.py"
-  }
-}
-```
+Then restart Claude Code. That's it.
 
-**3. Restart Claude Code** — the bar appears at the bottom under the input.
+**Requirements:** Python 3, Claude Code. No pip installs — pure stdlib.
 
-## Requirements
+---
 
-- Python 3 (stdlib only — no pip installs needed)
-- Claude Code
+## How it works
+
+- Queries JPL Horizons twice per refresh — once centered on Earth, once on the Moon — to get surface distances for both
+- Extracts the range-rate vector to determine approach direction (← or →)
+- Renders position proportionally across a 14-character ✦ track
+- Writes to `~/.claude/artemis_cache.json` so it's instant on repeated renders
+
+## Uninstall
+
+Remove the `statusLine` block from `~/.claude/settings.json` and delete `~/.claude/scripts/artemis_status.py`.
