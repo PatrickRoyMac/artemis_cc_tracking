@@ -35,6 +35,8 @@ Then restart Claude Code. That's it.
 
 ## Uninstall
 
+**Artemis II splashes down ~April 11, 2026.** Once Orion is back on Earth, run:
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/PatrickRoyMac/artemis_cc_tracking/main/uninstall.sh | bash
 ```
