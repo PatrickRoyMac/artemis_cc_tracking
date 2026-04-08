@@ -124,7 +124,7 @@ def main():
             return
 
         if not earth_result or not moon_result:
-            print("🚀 A-II: no data")
+            print("🌍 Orion is home! Uninstall: curl -fsSL https://raw.githubusercontent.com/PatrickRoyMac/artemis_cc_tracking/main/uninstall.sh | bash")
             return
 
         earth_km, speed, rr = earth_result
